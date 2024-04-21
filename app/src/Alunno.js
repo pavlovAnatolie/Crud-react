@@ -6,12 +6,12 @@ const [inCancellazione, setInCancellazione] = useState[false];
 const [richiestaConferma, setRichiestaConferma] = useState[false];
 
 function incrementaVoto(){
-    setContatore(contaotore +1);
+    setContatore(contatore + 1);
 }
 
 async function cancellaAlunno(){
     setRichiestaConferma(false);
-    setInCancellazione(false);
+    setInCancellazione(true);
 
     const response = await fetch(`http://localhost:8080/alunni/${alunno.id}`,{method:'GET'})
 

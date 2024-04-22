@@ -23,6 +23,7 @@ async function cancellaAlunno(){
     //metto la variabile inCancellazione a true nel moneto in cui clicco il bottone intereessato
     setInCancellazione(true);
 
+    //metodo che serve ad andare a interoggare una determinata pagina e avere in ritorno (in questo caso tutti gli alluni in formato json)
     const response = await fetch(`http://localhost:8080/alunni/${alunno.id}`,{method:'GET'})
     //ridisegno gli elementi uttilizzando il metdo (popolaAlunni())
     popolaAlunni();

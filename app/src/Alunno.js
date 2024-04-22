@@ -14,10 +14,13 @@ function incrementaVoto(){
     setContatore(contatore + 1);
 }
 
-//funzione che serve per cancellare un alunno
+//funzione che serve per cancellare un alunno async perche ce un metdodo await al interno percio bisogna gestire il fatto che sia assincrono
 async function cancellaAlunno(){
-    
+
+    //metto la variabile di stato a false nel caso in cui sia a true(disabilta il messaggio)
     setRichiestaConferma(false);
+
+    //metto la variabile inCancellazione a true nel moneto in cui clicco il bottone intereessato
     setInCancellazione(true);
 
     const response = await fetch(`http://localhost:8080/alunni/${alunno.id}`,{method:'GET'})
@@ -42,6 +45,7 @@ return(
         //al click del bottone chiamop il metodo {incrementaVoto} e faccio vedere in tempo reale il valore {contatore}
         <button onClick={incrementaVoto}>Aumenta{contatore}</button>
 
+        //se richiestaConfermaì==true allora creo l'elemento del messaagio di cancellazione altrimenti vorra dire che dovro creare il tasto cacella che porterà ,di seiguito, ad avere richiestaConferma==true
         { richiestaConferma ?
             <span> Sei Sicuro?
                 <button onClick={cancellaAlunno} >si</button>
@@ -51,7 +55,7 @@ return(
 
             <button onClick={richiesta}>Cancella</button>
         }
-        { inCancellazione && 
+        { inCancellazione && //se inCancelazione allora stampo lo span altrimenti non succede nulla fino a quando una successiva interazione mi porterà ad avere inCacelazione==true
             <span>in fase di Cancellazione</span>  
         }
     </div>

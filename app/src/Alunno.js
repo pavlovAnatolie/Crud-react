@@ -1,6 +1,9 @@
+//serve per importare gli state
 import {useState} from 'react';
 
+//alunno= attributo(oggetto/istanza) , popolaAlunni= metodo
 export default function Alunno({alunno, popolaAlunni}){
+//variabili di stato che possono variare nel corso dell'esecuzione
 const [contatore, setContatore] = useState[alunno.id];
 const [inCancellazione, setInCancellazione] = useState[false];
 const [richiestaConferma, setRichiestaConferma] = useState[false];

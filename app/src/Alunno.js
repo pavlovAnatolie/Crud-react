@@ -40,6 +40,7 @@ function annullaRichiesta(){
 }
 //elemento che viene ritorna una vota che viene chiamato nel app.js che rappresenta la pagina da disegnare
 return(
+    //renderizzatata dopo ogni modifica
     <div>//contenitore
         {alunno.nome} {alunno.cognome} //{} perche rappresenta le variabili in js e nome, cognome sono attoributi del tag alunno
 

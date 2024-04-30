@@ -1,6 +1,6 @@
 import './App.css';
 import Alunno from './Alunno'; 
-import InsForm from './InsForm';
+import Form from './Form';
 import {useState, useEffect} from 'react';
 
 
@@ -13,6 +13,7 @@ function App() {
   const [alunni,setAlunni] = useState([]);
   const [pronto,setPronto] = useState(false);
   const [insertForm,setInsertForm] = useState(false);
+  const [alunno,setAlunno] = useState(null);
 
 
   async function popolaAlunni(){
@@ -29,23 +30,24 @@ function App() {
         <table>
           <tr><th>Nome</th><th>Cognome</th></tr>
           { alunni.map((a) => (
-            <Alunno alunno={a} popolaAlunni={popolaAlunni} key={a.id} />
+            <Alunno alunno={a} popolaAlunni={popolaAlunni} setAlunno={setAlunno} setInsertForm={setInsertForm} key={a.id} />
           ))
           } 
         </table>
         :
         <div>Loading...</div>
       }
-      {
 
+      {
         insertForm ?
-          <div><InsForm popolaAlunni={popolaAlunni} />
+          <div>
+            <Form popolaAlunni={popolaAlunni} alunno={alunno} setAlunno={setAlunno} />
             <button onClick={() => setInsertForm(false)}>cancel</button>
           </div>
-
-        
         :
+        <>
           <button onClick={() => setInsertForm(true)}>Inserisci un nuovo alunno</button>
+          </>
       }
 
 

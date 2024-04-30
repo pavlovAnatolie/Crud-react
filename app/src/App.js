@@ -22,6 +22,10 @@ function App() {
     setAlunni(array);
     setPronto(true);
   }
+  function noUpdate(){
+    setInsertForm(false);
+    setAlunno(null);
+  }
 
   return(
     <div className='App'>
@@ -42,7 +46,7 @@ function App() {
         insertForm ?
           <div>
             <Form popolaAlunni={popolaAlunni} alunno={alunno} setAlunno={setAlunno} />
-            <button onClick={() => setInsertForm(false)}>cancel</button>
+            <button onClick={noUpdate} >cancel</button>
           </div>
         :
         <>

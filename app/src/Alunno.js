@@ -3,9 +3,9 @@ import { useState } from "react";
 export default function Alunno({ alunno, popolaAlunni }) {
   const [inCancellazione, setInCancellazione] = useState(false);
   const [richiestaConferma, setRichiestaConferma] = useState(false);
-  const [Editing, setEditare] = useState(false);
-  const [nome, setNome] = useState("");
-  const [cognome, setCognome] = useState("");
+  const [editing, setEditing] = useState(false);
+  const [nome, setNome] = useState(alunno.nome);
+  const [cognome, setCognome] = useState(alunno.cognome);
 
   async function cancellaAlunno() {
     setRichiestaConferma(false);
@@ -29,62 +29,74 @@ export default function Alunno({ alunno, popolaAlunni }) {
     setEditing(true);
   }
 
-   async function fineEditing() {
+  async function fineEditing() {
     setEditing(false);
-     await fetch(`http://localhost:8080/alunni/${alunno.id}`, 
-        {
-        method: "PUT",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({nome: nome, cognome:cognome})
+    await fetch(`http://localhost:8080/alunni/${alunno.id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ nome: nome, cognome: cognome }),
     });
 
-     popolaAlunni();
+    popolaAlunni();
   }
 
-  function changeNome(event){
-        setNome(event.target.value);
-    }
+  function changeNome(event) {
+    setNome(event.target.value);
+  }
 
-    function changeCognome(event){
-        setCognome(event.target.value);
-    }
+  function changeCognome(event) {
+    setCognome(event.target.value);
+  }
+
+  function annullaEditing() {
+    setEditing(false);
+  }
 
   return (
     <tr>
-    
-      <td>{Editing ? (
-       <input type="text" name="nome" onChange={changeNome}/><br />
-        </div>
+      {/* edit inline */}
+      <td>
+        {editing ? (
+          <input type="text" onChange={changeNome} value={nome} />
         ) : (
           alunno.nome
-        )}</td>
-  
-      <td>{Editing ? (
-       <input type="text" name="nome" onChange={changeCognome}/><br />
-        </div>
-        ) : (
-          alunno.cognome
-        )}</td>
+        )}
+      </td>
 
       <td>
-    {Editing ? (
-         <button onClick={fineEditing}>Salva</button>
+        {editing ? (
+          <input type="text" onChange={changeCognome} value={cognome} />
         ) : (
-          <button onClick={avviaEditing}>Edit</button>
+          alunno.cognome
         )}
+      </td>
 
-    
-        {richiestaConferma ? (
+      <td>
+        {editing ? (
+          //tag unico
           <span>
-            {" "}
-            Sei Sicuro?
-            <button onClick={cancellaAlunno}>si</button>
-            <button onClick={annullaRichiesta}>no</button>
+            <button onClick={fineEditing}>Salva</button>
+            <button onClick={annullaEditing}>cancel</button>
           </span>
         ) : (
-          <button onClick={richiesta}>Cancella</button>
+          //tag unico
+          <>
+            <button onClick={avviaEditing}>Edit</button>
+            {/*cancellazione*/}
+            {richiestaConferma ? (
+              //tag unico
+              <span>
+                {" "}
+                Sei Sicuro?
+                <button onClick={cancellaAlunno}>si</button>
+                <button onClick={annullaRichiesta}>no</button>
+              </span>
+            ) : (
+              <button onClick={richiesta}>elimina</button>
+            )}
+            {inCancellazione && <span>in fase di Cancellazione</span>}
+          </>
         )}
-        {inCancellazione && <span>in fase di Cancellazione</span>}
       </td>
     </tr>
   );

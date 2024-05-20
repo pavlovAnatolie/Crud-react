@@ -22,6 +22,8 @@ function App() {
     setAlunni(array);
     setPronto(true);
   }
+
+  //funzione che vale sia per il form di iserimento che per il form di aggiornamento
   function noUpdate(){
     setInsertForm(false);
     setAlunno(null);
@@ -34,6 +36,7 @@ function App() {
         <table>
           <tr><th>Nome</th><th>Cognome</th></tr>
           { alunni.map((a) => (
+            //alunno={a}-interagire con l'alunno popolaAlunni={popolaAlunni}-ridisegnare la pagina setAlunno={setAlunno}-per edit 2 setInsertForm={setInsertForm}-per edit 2 key={a.id}
             <Alunno alunno={a} popolaAlunni={popolaAlunni} setAlunno={setAlunno} setInsertForm={setInsertForm} key={a.id} />
           ))
           } 

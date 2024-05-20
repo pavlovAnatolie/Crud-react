@@ -26,7 +26,7 @@ function App() {
   //funzione che vale sia per il form di iserimento che per il form di aggiornamento
   function noUpdate(){
     setInsertForm(false);
-    setAlunno(null);
+    setAlunno(null); //per quanto ruguarda il caso di avere l'update
   }
 
   return(

@@ -78,7 +78,7 @@ export default function Alunno({ alunno, popolaAlunni,setAlunno, setInsertForm }
 
       <td>
         {editing ? (
-          //tag unico
+          //tag unico che permette di accedere o meno nella fase di editing
           <span>
             <button onClick={fineEditing}>Salva</button>
             <button onClick={annullaEditing}>cancel</button>
